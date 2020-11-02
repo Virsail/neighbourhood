@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 #from .token_generator import account_activation_token
 from django.http import JsonResponse
-from .forms import SignUpForm, ActivityForm, ProfileForm, BusinessForm 
+from .forms import SignUpForm, ActivityForm, UserForm, BussinessForm 
 
 
 # Create your views here.
@@ -37,9 +37,22 @@ def signPage(request):
 
 # Function for the home page
 def dashboard(request):
+     try:
+        user = User.objects.filter(user_id=request.user.id)
+        arr = []
+        for new in user:
+            arr.append(new.neighbourhood.id)
+        if len(arr)>0:
+            id = arr[0]
+            activities=Activities.objects.filter(neighbourhood=id)
+        else:
+            activitiess=Activities.objects.filter(neighbourhood=10000000000)
+    except Exception as error:
+        raise Http404()
     
     
-    return render(request,'dashboard.html')
+    
+    return render(request,'dashboard.html', , {"activities":activities, "user":user})
 # search function
 @login_required(login_url='/accounts/login/')
 def search_results(request):
@@ -60,7 +73,7 @@ def user(request):
     activities = Activities.objects.filter(profile = current_user)
 
     try:
-        profile = Profile.objects.get(user=current_user)
+        User = User.objects.get(user=current_user)
     except ObjectDoesNotExist:
         return redirect('new-user')
 
@@ -71,7 +84,7 @@ def user(request):
 def activities(request):
     current_user = request.user
     if request.method == 'POST':
-        form = activityForm(request.POST, request.FILES)
+        form = ActivityForm(request.POST, request.FILES)
         if form.is_valid():
             activity = form.save(commit=False)
             activity.profile = current_user
@@ -82,18 +95,70 @@ def activities(request):
     else:
         form = ActivityForm()
     return render(request, 'fatheroffour/new_activity.html', {"form": form})
+
+# 
+def display_businesses(request):
+    current_user = request.user
+    try:
+        User = User.objects.filter(user=request.user)
+        arr=[]
+        for biz in User:
+            arr.append(biz.neighbourhood.id)
+        if len(arr)>0:
+            id=arr[0]
+            bussinesses=Bussinesses.objects.filter(business_neighbourhood=id)
+        else:
+            businesses=Businesses.objects.filter(business_neighbourhood=10000000000)
+    except Exception as error:
+        raise Http404()
+        
+        title = "Businesses"
+
+    return render(request,'bussiness/businesses.html', {"id":id, "businesses":businesses})
+
+# function for user edit
 @login_required(login_url='/accounts/login/')
-def new_profile(request):
+def edit_user(request):
     current_user = request.user
     if request.method == 'POST':
-        form = NewProfileForm(request.POST, request.FILES)
+        user = User.objects.get(user=request.user)
+        form = UserForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = current_user
-            profile.userId = request.user.id
-            profile.save()
-        return redirect('NewProfile')
+            form.save()
+        return redirect('new_profile')
     else:
-        form = NewProfileForm()
-    return render(request, 'new_profile.html', {"form": form})
+        form = UserForm()
+    return render(request,'profile_edit.html',{'form':form})
+
+# new user function
+@login_required(login_url='/accounts/login/')
+def new_user(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = current_user
+            user.userId = request.user.id
+            user.save()
+        return redirect('new_profile')
+    else:
+        form = UserForm()
+    return render(request, 'profiles/new_profile.html', {"form": form})
+# function to handle new businesses
+@login_required(login_url='/accounts/login/')
+def businesses(request):
+    current_user = request.user
+
+    if request.method == 'POST':
+        form = BussinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            bussiness = form.save(commit=False)
+            bussiness.user = current_user
+            bussiness.save()
+        return redirect('biz')
+
+    else:
+        form = BussinessForm()
+    return render(request, 'new_business.html', {"form": form})
 
