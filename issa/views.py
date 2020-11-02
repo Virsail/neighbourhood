@@ -69,4 +69,4 @@ def activities(request):
 
     else:
         form = ActivityForm()
-    return render(request, 'new_post.html', {"form": form})
+    return render(request, 'fatheroffour/new_activity.html', {"form": form})

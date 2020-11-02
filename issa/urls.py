@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^$', views.dashboard, name='dashboard'),
     url(r'^registerPage/$', views.signPage, name='signPage'),
     url(r'^search/$', views.search_results, name='search_results'),
+    url(r'^new/activity$', views.activities, name='new-activities'),
     #url(r'^project/(\d+)', views.get_project, name='project_results'),
     #url(r'^new/project$', views.new_project, name='new-project'),
     #url(r'^accounts/profile/$', views.user_profiles, name='profile'),
