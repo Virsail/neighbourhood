@@ -11,14 +11,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from rest_framework.views import APIView
-#from .forms import PostForm, BussinessForm, ProfileForm
 import datetime as dt
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 #from .token_generator import account_activation_token
 from django.http import JsonResponse
-from .forms import SignUpForm
+from .forms import SignUpForm, PostForm, 
 
 
 # Create your views here.
@@ -55,4 +54,18 @@ def search_results(request):
     else:
      message = "There are currently no businesses"
      return render(request, 'fatheroffour/search.html',{"message":message})
+@login_required(login_url='/accounts/login/')
+def new_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.profile = current_user
+            post.poster_id = current_user.id
+            post.save()
+        return redirect('home')
 
+    else:
+        form = NewPostForm()
+    return render(request, 'new_post.html', {"form": form})
