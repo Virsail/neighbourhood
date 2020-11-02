@@ -16,19 +16,3 @@ class SignUpForm(UserCreationForm):
 
 
 
-class ActivityForm(forms.ModelForm):
-    class Meta:
-        model = Posts
-        exclude = ['pub_date','profile']
-
-
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        exclude = ['user']
-
-
-class BussinessForm(forms.ModelForm):
-    class Meta:
-        model = Businesses
-        exclude = ['user']

@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 #from .token_generator import account_activation_token
 from django.http import JsonResponse
-from .forms import SignUpForm, ActivityForm, UserForm, BussinessForm 
+#from .forms import SignUpForm, ActivityForm, UserForm, BussinessForm 
 
 
 # Create your views here.
@@ -37,22 +37,11 @@ def signPage(request):
 
 # Function for the home page
 def dashboard(request):
-     try:
-        user = User.objects.filter(user_id=request.user.id)
-        arr = []
-        for new in user:
-            arr.append(new.neighbourhood.id)
-        if len(arr)>0:
-            id = arr[0]
-            activities=Activities.objects.filter(neighbourhood=id)
-        else:
-            activitiess=Activities.objects.filter(neighbourhood=10000000000)
-    except Exception as error:
-        raise Http404()
+   
     
     
     
-    return render(request,'dashboard.html', , {"activities":activities, "user":user})
+        return render(request,'dashboard.html', {"activities":activities, "user":user})
 # search function
 @login_required(login_url='/accounts/login/')
 def search_results(request):
@@ -97,7 +86,7 @@ def activities(request):
     return render(request, 'fatheroffour/new_activity.html', {"form": form})
 
 # 
-def display_businesses(request):
+def display_business(request):
     current_user = request.user
     try:
         User = User.objects.filter(user=request.user)
