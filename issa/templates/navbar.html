@@ -1,0 +1,86 @@
+{% load static %}
+  
+   <!-- Navbar -->
+   <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="{% url 'page' %}"><i class="fas fa-home"></i> 
+        <strong>WinniT Home Page</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'page' %}"><i class="fa fa-history" aria-hidden="true"></i>
+              <strong style="font-size: larger; color:greenyellow;">Recently posted Websites</strong>
+      
+            </a>
+        </li>
+        {% if user.is_authenticated %}
+        
+        {% endif %}
+      
+        </ul>
+        <!--search form-->
+        {% if user.is_authenticated %}
+        <form class="form-inline" action="{% url 'search_results' %}">
+          <div class="md-form my-1">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="keyword">
+          </div>
+        </form>
+        {% endif %}
+
+        <div class="col-sm-6 col-lg-6 d-flex justify-content-end">
+          {% if user.is_authenticated %}
+          <ul><li class="nav-item">
+            <div class="jok">
+              <a class="text-white btn btn-outline-dark" href="{%url 'new-project'%}"><i class="fa fa-paper-plane" aria-hidden="true"></i>SUBMIT YOUR WEBSITE </a>
+              </div>
+            </li></ul>
+          <ul>
+            <li class="dropdown list-unstyled text-white">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user" style="color: yellow;"></i> My Account </a>
+              <ul class="dropdown-menu dropdown-default" role="menu">
+                <li>
+                    <a class="dropdown-item" href="{%url 'profile'%}">Profile</a>
+                  </li>
+                <li>
+                  <a class="dropdown-item" href="/accounts/password/change">Change Password</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/logout">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          {% else %}
+          <li class="list-unstyled">
+            <div id="chapa">
+              <a class="btn btn-sm btn-default" href="/accounts/login" style="font-size: 15px; color: white;"style="color: yellow;"><i class="fas fa-sign-in"></i>Login</a></i>Login</a>
+              </div>
+              <div id="chapa1">
+              <a class='btn btn-sm btn-default ' href="/accounts/register"style="font-size: 15px;"><i class="fas fa-user-plus"></i>Register</a>
+              </div>
+          </li>
+          </div>
+          </div>
+
+          {% endif %}
+    </div>
+    
+
+</div>
+<!-- Collapsible content -->
+</nav>
