@@ -54,6 +54,18 @@ def search_results(request):
     else:
      message = "There are currently no businesses"
      return render(request, 'fatheroffour/search.html',{"message":message})
+# function for the profile page
+def user(request):
+    current_user = request.user
+    activities = Activities.objects.filter(profile = current_user)
+
+    try:
+        profile = Profile.objects.get(user=current_user)
+    except ObjectDoesNotExist:
+        return redirect('new-user')
+
+    return render(request,'profiles/user_profile.html',{ 'profile':profile,'activities':activities,'current_user':current_user})
+
 # fnction that will handle activities posted by user
 @login_required(login_url='/accounts/login/')
 def activities(request):
@@ -70,3 +82,18 @@ def activities(request):
     else:
         form = ActivityForm()
     return render(request, 'fatheroffour/new_activity.html', {"form": form})
+@login_required(login_url='/accounts/login/')
+def new_profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.userId = request.user.id
+            profile.save()
+        return redirect('NewProfile')
+    else:
+        form = NewProfileForm()
+    return render(request, 'new_profile.html', {"form": form})
+
