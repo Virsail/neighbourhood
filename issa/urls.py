@@ -14,15 +14,6 @@ urlpatterns = [
     url(r'^edit_profile/$',views.edit_user,name = 'edit_profile'),
     url(r'^businesses/$',views.businesses,name = 'biz'),
     url(r'^display/$',views.display_business,name = 'display_business'),
-
-
-    #url(r'^project/(\d+)', views.get_project, name='project_results'),
-    #url(r'^new/project$', views.new_project, name='new-project'),
-    #url(r'^accounts/profile/$', views.user_profiles, name='profile'),
-    
-    #url(r'api/project/project-id/(?P<pk>[0-9]+)/$',
-    #    views.ProjectDescription.as_view())
-  
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

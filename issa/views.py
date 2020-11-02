@@ -149,5 +149,5 @@ def businesses(request):
 
     else:
         form = BussinessForm()
-    return render(request, 'new_business.html', {"form": form})
+    return render(request, 'business/new_business.html', {"form": form})
 
