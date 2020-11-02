@@ -1,9 +1,9 @@
-from django.contrib.auth.decorators import login_required.
+from django.contrib.auth.decorators import login_required 
 from rest_framework import status
 from django.shortcuts import render, redirect, render_to_response, HttpResponseRedirect
 from django.http import HttpResponse, Http404
 from django.contrib.auth.forms import UserCreationForm
-#from .models import Projects, Profile
+from .models import Profile, Businesses, Posts
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -11,6 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .forms import NewPostForm, NewBusinessForm, NewProfileForm
 import datetime as dt
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
