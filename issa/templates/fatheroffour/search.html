@@ -1,0 +1,26 @@
+{%extends 'fatheroffour/base.html'%} 
+{% block content %}
+{% load bootstrap3 %}
+<div class="container">
+
+  <div class="row">
+    {% if businesses%}
+      <h3>Found {{ businesses|length }} of searched term {{message}}</h3>
+    {% else %}
+      <h3> No upcoming business{{message}}</h3>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if businesses %}
+    {% for business in businesses %}
+      <div class="col-sm-6 col-md-3">
+          <h1>{{business.title}}</h1>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -11,18 +11,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .forms import PostForm, BussinessForm, ProfileForm
+#from .forms import PostForm, BussinessForm, ProfileForm
 import datetime as dt
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
-from .token_generator import account_activation_token
+#from .token_generator import account_activation_token
 from django.http import JsonResponse
 from .forms import SignUpForm
 
 
 # Create your views here.
-def registerPage(request):
+def signPage(request):
      if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -34,24 +34,25 @@ def registerPage(request):
             return redirect('dashboard.html')
      else:
         form = SignUpForm()
-        return render(request, 'registration/signup.html', {'form': form})
-def page(request):
-   return render(request, 'dashboard.html')
+        return render(request, 'registration/registration_form.html', {'form': form})
+
 # Function for the home page
 def dashboard(request):
-    try:
-        profile = Profile.objects.filter(user_id=request.user.id)
-        arr = []
-        for new in profile:
-            arr.append(new.neighbourhood.id)
-        if len(arr)>0:
-            id = arr[0]
-            posts=Posts.objects.filter(neighbourhood=id)
-        else:
-            posts=Posts.objects.filter(neighbourhood=10000000000)
-    except Exception as e:
-        raise Http404()
     
-    return render(request,'home.html', {"posts":posts, "profile":profile})
+    
+    return render(request,'dashboard.html')
+# search function
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_businesses = Business.search_by_title(search_term)
+        message = f"{search_term}"
 
+        return render(request, 'fatheroffour/search.html',{"message":message,"projects": searched_projects})
+
+    else:
+     message = "There are currently no businesses"
+     return render(request, 'fatheroffour/search.html',{"message":message})
 
