@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 #from .token_generator import account_activation_token
 from django.http import JsonResponse
-from .forms import SignUpForm, PostForm, 
+from .forms import SignUpForm, ActivityForm, ProfileForm, BusinessForm 
 
 
 # Create your views here.
@@ -54,18 +54,19 @@ def search_results(request):
     else:
      message = "There are currently no businesses"
      return render(request, 'fatheroffour/search.html',{"message":message})
+# fnction that will handle activities posted by user
 @login_required(login_url='/accounts/login/')
-def new_post(request):
+def activities(request):
     current_user = request.user
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = activityForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.profile = current_user
-            post.poster_id = current_user.id
-            post.save()
-        return redirect('home')
+            activity = form.save(commit=False)
+            activity.profile = current_user
+            activity.submitter_id = current_user.id
+            activity.save()
+        return redirect('dashboard')
 
     else:
-        form = NewPostForm()
+        form = ActivityForm()
     return render(request, 'new_post.html', {"form": form})
