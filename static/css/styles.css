@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+
 .homesection {
     text-align: center;
     color: white;
@@ -9,4 +11,7 @@
 }
 .search {
     background-color: white;
+}
+.iamge {
+    background-color: green;
 }
