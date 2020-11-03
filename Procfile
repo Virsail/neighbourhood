@@ -1,0 +1,1 @@
+web: gunicorn nightmare.wsgi --log-file -

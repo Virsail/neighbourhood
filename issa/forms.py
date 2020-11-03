@@ -1,10 +1,10 @@
 from pyuploadcare.dj.forms import ImageField
 from django import forms
 from django.forms import ModelForm
-#from .models import Projects, Profile, Review
+from .models import User, NeighbourHood, Business, Activity
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib .auth.models import User
-#from .models import Businesses, Posts, Profile, NeighbourHood
+
 
 
 class SignUpForm(UserCreationForm):
@@ -14,5 +14,21 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
+class ActivityForm(forms.ModelForm):
+    class Meta:
+        model = Posts
+        exclude = ['profile','pub_date']
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        exclude = ['user']
+
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['user']
 
 

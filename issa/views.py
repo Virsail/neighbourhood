@@ -3,7 +3,7 @@ from rest_framework import status
 from django.shortcuts import render, redirect, render_to_response, HttpResponseRedirect
 from django.http import HttpResponse, Http404
 from django.contrib.auth.forms import UserCreationForm
-#from .models import Profile, Businesses, Posts
+from .models import User, Business, Activity, NeighbourHood
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 #from .token_generator import account_activation_token
 from django.http import JsonResponse
-#from .forms import SignUpForm, ActivityForm, UserForm, BussinessForm 
+from .forms import SignUpForm, ActivityForm, UserForm, BussinessForm 
 
 
 # Create your views here.
