@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', views.dashboard, name='dashboard'),
+#   url(r'^api/register/$', RegisterAPI.as_view(), name='register'),
     url(r'^registerPage/$', views.signPage, name='signPage'),
     url(r'^search/$', views.search_results, name='search_results'),
     url(r'^new/activity$', views.activities, name='new-activities'),

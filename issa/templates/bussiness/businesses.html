@@ -1,0 +1,43 @@
+
+{% extends 'fatheroffour/base.html' %}
+
+{% block content %}
+{{block.super}}
+
+<div class="container-fluid" style="margin-top:7%">
+
+    <h2 class="slogan" style=" text-align: center">Businesses coming up</h2>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% for biss in businesses %}
+            <div class="col-md-4" style="padding:1%">
+                <div class="card border border-info" id="borderid">
+                    <div style="text-align:center; background-color:#132c;" class="card-image">
+
+                        <img class="img-responsive" src="{{biss.business_picture.url}}" alt="" height="200px" width="300px">
+                        
+                    </div>
+                    <div style="margin:2%">
+                        <br>
+                        <p class="heading">{{biss.name}}</p>
+                        <hr>
+                        <p> {{biss.business_description}}</p>
+
+                        <p style="float:right">{{biss.business_email}}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row">
+                <h2 class="text-center">Your hood sucks! No business coming up man.</h2>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

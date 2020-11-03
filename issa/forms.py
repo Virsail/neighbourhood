@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
 
 class ActivityForm(forms.ModelForm):
     class Meta:
-        model = Posts
+        model = Activity
         exclude = ['profile','pub_date']
 
 
