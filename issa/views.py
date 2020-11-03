@@ -3,7 +3,7 @@ from rest_framework import status
 from django.shortcuts import render, redirect, render_to_response, HttpResponseRedirect
 from django.http import HttpResponse, Http404
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Business, Activity, NeighbourHood
+from .models import Profile, Business, Activity, NeighbourHood
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -18,6 +18,9 @@ from .serializers import UserSerializer, RegisterSerializer
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
 from .forms import SignUpForm, ActivityForm, UserForm, BusinessForm
+from django.http import JsonResponse
+
+
 
 
 # Register API
@@ -52,10 +55,11 @@ def signPage(request):
 # Function for the home page
 def dashboard(request):
    
+       
     
-    
-    
-        return render(request,'dashboard.html', {"activities":activities, "user":user})
+    return render(request,'dashboard.html', {"activities":activities, "profile":profile})
+
+
 # search function
 @login_required(login_url='/accounts/login/')
 def search_results(request):
@@ -71,7 +75,7 @@ def search_results(request):
      message = "There are currently no businesses"
      return render(request, 'fatheroffour/search.html',{"message":message})
 # function for the profile page
-def user(request):
+def Profile(request):
     current_user = request.user
     activities = Activities.objects.filter(profile = current_user)
 
@@ -131,7 +135,7 @@ def edit_user(request):
         return redirect('new_profile')
     else:
         form = UserForm()
-    return render(request,'profile_edit.html',{'form':form})
+    return render(request,'profiles/profile_edit.html',{'form':form})
 
 # new user function
 @login_required(login_url='/accounts/login/')
@@ -154,7 +158,7 @@ def businesses(request):
     current_user = request.user
 
     if request.method == 'POST':
-        form = BussinessForm(request.POST, request.FILES)
+        form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
             bussiness = form.save(commit=False)
             bussiness.user = current_user
@@ -162,6 +166,6 @@ def businesses(request):
         return redirect('biz')
 
     else:
-        form = BussinessForm()
-    return render(request, 'business/new_business.html', {"form": form})
+        form = BusinessForm()
+    return render(request, 'bussiness/new_business.html', {"form": form})
 

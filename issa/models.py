@@ -34,7 +34,10 @@ class NeighbourHood(models.Model):
     def __str__(self):
         return self.neighbourhood_name
 
-class User(models.Model):
+
+
+
+class Profile(models.Model):
     name = models.CharField(max_length = 60)
     user_Id =models.IntegerField(default = 0)
     user = models.ForeignKey(User,on_delete = models.CASCADE,null = True)
@@ -42,20 +45,20 @@ class User(models.Model):
     user_email = models.EmailField()
 
 
-    def save_user(self):
+    def save_profile(self):
         self.save()
 
-    def delete_user(self):
+    def delete_profile(self):
         self.delete()   
 
 
     @classmethod
-    def find_user(cls, user_id):
-        User = cls.objects.get(id=user_id)
-        return user
+    def find_profile(cls, user_id):
+        Profile = cls.objects.get(id=user_id)
+        return profile
 
     @classmethod
-    def update_user(cls,user,update):
+    def update_profile(cls,user,update):
          updated = cls.objects.filter(name=user).update(name=update)
          return updated
 

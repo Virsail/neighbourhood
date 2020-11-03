@@ -1,31 +1,31 @@
 from django.test import TestCase
-from .models import Activity, User, NeighbourHood, Business
+from .models import Activity, Profile, NeighbourHood, Business
 from django.contrib.auth.models import User
 
 # Create your tests here.
-class UserTestClass(TestCase):
+class ProfileTestClass(TestCase):
     # Set up method
     def setUp(self):
-        self.virsail = User(id = 25)
+        self.virsail = Profile(id = 25)
 
     # Testing instance
     def test_instance(self):
-        self.assertTrue(isinstance(self.virsail,User))
+        self.assertTrue(isinstance(self.virsail,Profile))
     
  #  def test_initialization(self):
     
 
     # Testing Save method
-    def test_create_user(self):
+    def test_create_profile(self):
 #       self.virsail.save_user()
-        users = User.objects.all()
-        self.assertFalse(len(users)>0)
+        profiles = Profile.objects.all()
+        self.assertFalse(len(profiles)>0)
 
     # Testing Delete method
-    def test_delete_user(self):
+    def test_delete_profile(self):
  #      self.virsail.delete_user()
-        users = User.objects.all()
-        self.assertTrue(len(users) == 0)
+        profiles = Profile.objects.all()
+        self.assertTrue(len(profiles) == 0)
 
 
 

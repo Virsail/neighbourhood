@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'pyuploadcare.dj',
     'rest_framework',
     'knox'
+    
 ]
 
 REST_FRAMEWORK = {
@@ -61,6 +62,7 @@ REST_FRAMEWORK = {
         'knox.auth.TokenAuthentication',
     ]
 }
+
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
