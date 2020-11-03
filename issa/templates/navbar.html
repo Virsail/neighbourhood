@@ -232,3 +232,73 @@
   
   </div>
   <!-- Grid row -->
+
+<body>
+  
+        <a href="{%url 'new-activities'%}">Create a Post</a>
+
+        <ul class="navbar-nav mr-auto">
+          {% if user.is_authenticated %}
+          {% if profile %}
+          <li class="dropdown">
+            <a class="navbar-brand" style="color:rgb(10, 10, 10)" href="" data-toggle="dropdown" role="button"></i>Businesses</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a style="font-size:15px;" href="{%url 'biz'%}"> Post a business </a>
+              </li>
+              <li>
+                <a style="font-size:15px;" href="{%url 'display_business'%}">Businesses</a>
+              </li>
+
+            </ul>
+
+          </li>
+        </ul>
+        {% endif %}
+        {% endif %}
+
+        <!-- <a href="#">Contact</a> -->
+      </div>
+
+
+      <div id="main">
+
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+      </div>
+
+      <form class="search text-center" style="margin-top: 1.5%; margin-left:5%;" role="search" action="{% url 'search_results' %}">
+        <input type="text" class="input-sm form-control" name="username" placeholder="Search">
+      </form>
+
+      <div style="margin-left:75%; margin-top: -6%;">
+       
+        {% if user.is_authenticated %}
+        <ul>
+          <li class="dropdown" style="color:#142e0f;margin-left:85%; margin-top: 5%;">
+            <a class="nav-link" href="" data-toggle="dropdown" role="button"><img src="https://image.flaticon.com/icons/png/128/118/118781.png"
+                alt="" style="width:30px;height:30px;"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a style="font-size:15px;" href="{%url 'new_profile'%}">Profile</a>
+              </li>
+              <a style="font-size:15px;" href="/edit_profile">Switch Neighbourhoods</a>
+              <li>
+                <a style="font-size:15px;" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        {% else %}
+        <!-- <li> -->
+        <a style="font-size:15px;color: rgb(247, 243, 243);" href="/accounts/login">REGISTER/LOGIN</a>
+        <!-- </li> -->
+
+        {% endif %}
+
+      </div>
+
+
+
+
+
+     
