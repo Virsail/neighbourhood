@@ -1,0 +1,22 @@
+{% extend 'fatheroffour/base.html' %}
+{% load staticfiles %}
+
+  <title>New Business</title>
+  {{form.media}}
+
+<body>
+  <p class="newdata" style="text-align:center;">Add a new Business</p>
+  <div class="container" style="margin-top:30px">
+    <div class="jumbotron" style="background-color:rgb(216, 232, 233)">
+
+      <form action="{%url 'new_business'%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-info btn-lg" value="Post">
+      </form>
+
+    </div>
+  </div>
+</body>
+
