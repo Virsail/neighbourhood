@@ -1,0 +1,26 @@
+{% extend 'fatheroffour/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+  <title>Edit  Your  Profile</title>
+  {{form.media}}
+
+<body>
+  <br>
+  <p class="newdata" style="text-align:center;">Edit Profile</p>
+  <div class="container" style="margin-top:30px">
+    <div class="jumbotron" style="background-color:mediumblue">
+
+      <form action="{%url 'edit_profile'%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-info btn-lg" value="Post">
+      </form>
+    </div>
+  </div>
+
+</body>
+
+
+{% endblock %}
