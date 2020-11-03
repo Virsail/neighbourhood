@@ -20,12 +20,12 @@ class NeighbourHood(models.Model):
     def delete_neighborhood(self):
         self.delete()   
 
-     @classmethod
+    @classmethod
     def update_neighbourhood(cls,neighbourhood,update):
          updated = cls.objects.filter(neighbourhood_name=neighbourhood).update(name=update)
          return updated
 
-     @classmethod
+    @classmethod
     def update_occupants_count(cls,occupants_count,update):
          updated = cls.objects.filter(occupants_count=occupants_count).update(name=update)
          return updated
@@ -83,7 +83,7 @@ class Business(models.Model):
         single_business = cls.objects.get(id=post_id)
         return single_business
 
-     @classmethod
+    @classmethod
     def get_businesses(cls):
         businesses = Businesses.objects.all()
         return businesses
@@ -94,7 +94,7 @@ class Business(models.Model):
 
 
 class Activity(models.Model):
-    user = models.ForeignKey(Profile,on_delete = models.CASCADE,related_name='profile')
+    user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='profile')
     title = models.CharField(max_length = 60)
     activity = models.TextField(blank= True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
