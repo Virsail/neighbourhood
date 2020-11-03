@@ -13,5 +13,10 @@
     background-color: white;
 }
 .iamge {
-    background-color: green;
+    font-family: 'Syne Mono', monospace;
+    background-image: url(../images/sddefault.jpg);
+    color: white;
+}
+.container {
+    font-family: 'syne Mono', monospace;
 }
