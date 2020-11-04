@@ -24,7 +24,17 @@
 body {
     overflow-x: hidden;
 }
+.container {
+    color: white;
+}
+.background {
+    color: yellow;
+    background-color:  #1C2331;
 
+}
+h3 {
+    color: black;
+}
 
 
 

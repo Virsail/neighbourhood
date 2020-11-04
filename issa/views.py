@@ -54,10 +54,9 @@ def signPage(request):
 
 # Function for the home page
 def dashboard(request):
-   
-       
     
-    return render(request,'dashboard.html', {"activities":activities, "profile":profile})
+    return render(request,'dashboard.html', {"activity":activities})
+
 
 
 # search function
@@ -75,16 +74,16 @@ def search_results(request):
      message = "There are currently no businesses"
      return render(request, 'fatheroffour/search.html',{"message":message})
 # function for the profile page
-def Profile(request):
+def user_profile(request):
     current_user = request.user
-    activities = Activities.objects.filter(profile = current_user)
+    activity = Activity.objects.filter(user = current_user)
 
     try:
-        User = User.objects.get(user=current_user)
+        profile = Profile.objects.get(user=current_user)
     except ObjectDoesNotExist:
         return redirect('new-user')
 
-    return render(request,'profiles/user_profile.html',{ 'profile':profile,'activities':activities,'current_user':current_user})
+    return render(request,'profiles/user_profile.html',{ 'profile':profile,'activity':activity,'current_user':current_user})
 
 # fnction that will handle activities posted by user
 @login_required(login_url='/accounts/login/')
@@ -104,54 +103,47 @@ def activities(request):
     return render(request, 'fatheroffour/new_activity.html', {"form": form})
 
 # 
+
 def display_business(request):
     current_user = request.user
-    try:
-        User = User.objects.filter(user=request.user)
-        arr=[]
-        for biz in User:
-            arr.append(biz.neighbourhood.id)
-        if len(arr)>0:
-            id=arr[0]
-            bussinesses=Bussinesses.objects.filter(business_neighbourhood=id)
-        else:
-            businesses=Businesses.objects.filter(business_neighbourhood=10000000000)
-    except Exception as error:
-        raise Http404()
-        
-        title = "Businesses"
+    
+       
+    
 
     return render(request,'bussiness/businesses.html', {"id":id, "businesses":businesses})
 
+
 # function for user edit
 @login_required(login_url='/accounts/login/')
-def edit_user(request):
+def edit_profile(request):
     current_user = request.user
     if request.method == 'POST':
-        user = User.objects.get(user=request.user)
-        form = UserForm(request.POST, request.FILES, instance=user)
+        profile = Profile.objects.get(user=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
         return redirect('new_profile')
     else:
-        form = UserForm()
+        form = ProfileForm()
     return render(request,'profiles/profile_edit.html',{'form':form})
 
 # new user function
 @login_required(login_url='/accounts/login/')
-def new_user(request):
+def new_profile(request):
     current_user = request.user
     if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.user = current_user
-            user.userId = request.user.id
-            user.save()
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.userId = request.user.id
+            profile.save()
         return redirect('new_profile')
     else:
-        form = UserForm()
+        form = ProfileForm()
     return render(request, 'profiles/new_profile.html', {"form": form})
+
+
 # function to handle new businesses
 @login_required(login_url='/accounts/login/')
 def businesses(request):
@@ -168,4 +160,6 @@ def businesses(request):
     else:
         form = BusinessForm()
     return render(request, 'bussiness/new_business.html', {"form": form})
+
+
 
