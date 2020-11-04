@@ -25,6 +25,7 @@ As a user I would like to:
 ![Screenshot from 2020-11-04 18-31-37](https://user-images.githubusercontent.com/66640798/98131182-176b4600-1ecc-11eb-9312-381b2f918574.png)
 ## Business Search results
 
+![Screenshot from 2020-11-04 18-35-33](https://user-images.githubusercontent.com/66640798/98131786-ad9f6c00-1ecc-11eb-8ce9-a807a03e9cb7.png)
 ## Setup and Installation  
 Clone the repository from github 
 ##### Cloning the repository:  
