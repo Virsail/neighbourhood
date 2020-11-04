@@ -21,7 +21,8 @@ As a user I would like to:
 ## Home Page
 ![Screenshot from 2020-11-04 18-01-36](https://user-images.githubusercontent.com/66640798/98129034-b478af80-1ec9-11eb-9859-ff6f62e4148a.png)
 
-
+## Account Sign up
+![Screenshot from 2020-11-04 14-46-27](https://user-images.githubusercontent.com/66640798/98129480-379a0580-1eca-11eb-8def-1e3e379046f7.png)
   
 ## Setup and Installation  
 Clone the repository from github 
