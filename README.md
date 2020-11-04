@@ -23,7 +23,8 @@ As a user I would like to:
 
 ## User account creation
 ![Screenshot from 2020-11-04 18-31-37](https://user-images.githubusercontent.com/66640798/98131182-176b4600-1ecc-11eb-9312-381b2f918574.png)
-  
+## Business Search results
+
 ## Setup and Installation  
 Clone the repository from github 
 ##### Cloning the repository:  
