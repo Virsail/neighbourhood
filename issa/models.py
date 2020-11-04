@@ -32,7 +32,7 @@ class NeighbourHood(models.Model):
 
 
     def __str__(self):
-        return self.neighbourhood_name
+        return self.name
 
 
 
@@ -63,7 +63,7 @@ class Profile(models.Model):
          return updated
 
     def __str__(self):
-        return self.full_name
+        return self.name
 
 class Business(models.Model):
     name = models.CharField(max_length = 100)
@@ -73,7 +73,7 @@ class Business(models.Model):
     business_picture = models.ImageField(upload_to = 'stoptrynabegod/')
 
     def __str__(self):
-        return self.business_name
+        return self.name
 
     def save_business(self):
         self.save()

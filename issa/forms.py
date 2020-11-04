@@ -20,9 +20,9 @@ class ActivityForm(forms.ModelForm):
         exclude = ['profile','pub_date']
 
 
-class UserForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Profile
         exclude = ['user']
 
 

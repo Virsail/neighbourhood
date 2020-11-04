@@ -17,7 +17,7 @@ from knox.models import AuthToken
 from .serializers import UserSerializer, RegisterSerializer
 from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
-from .forms import SignUpForm, ActivityForm, UserForm, BusinessForm
+from .forms import SignUpForm, ActivityForm, ProfileForm, BusinessForm
 from django.http import JsonResponse
 
 
